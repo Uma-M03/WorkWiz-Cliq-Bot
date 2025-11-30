@@ -1,0 +1,53 @@
+
+response = Map();
+//////////////////////////////////////////////////////////////////
+// 1️⃣ Leave Apply – Context
+//////////////////////////////////////////////////////////////////
+if(context_id.equals("leave_apply"))
+{
+	leaveDate = answers.get("leave_date").get("text");
+	reason = answers.get("reason").get("text");
+	msg = "📝 *Leave Request Summary*\n";
+	msg = msg + "📅 Date : " + leaveDate + "\n";
+	msg = msg + "💬 Reason : " + reason + "\n\n";
+	msg = msg + "✔ Your leave request has been recorded!";
+	response.put("text",msg);
+}
+//////////////////////////////////////////////////////////////////
+// 2️⃣ Attendance Summary – Context
+//////////////////////////////////////////////////////////////////
+else if(context_id.equals("attendance_summary"))
+{
+	monthInput = answers.get("month").get("text");
+	msg = "📊 *Attendance Summary for " + monthInput + "*\n";
+	msg = msg + "Present : 20 Days\n";
+	msg = msg + "Absent : 2 Days\n";
+	msg = msg + "Late Marks : 1\n";
+	response.put("text",msg);
+}
+//////////////////////////////////////////////////////////////////
+// 3️⃣ HR Document Generate – Context
+//////////////////////////////////////////////////////////////////
+else if(context_id.equals("document_generate"))
+{
+	month = answers.get("month").get("text");
+	year = answers.get("year").get("text");
+	msg = "📄 *Salary Slip Request Received*\n";
+	msg = msg + "Month : " + month + "\n";
+	msg = msg + "Year : " + year + "\n\n";
+	msg = msg + "✔ Generating your document…";
+	response.put("text",msg);
+}
+//////////////////////////////////////////////////////////////////
+// 4️⃣ Meeting Summary – Context
+//////////////////////////////////////////////////////////////////
+else if(context_id.equals("meeting_summary"))
+{
+	meetingNotes = answers.get("notes").get("text");
+	summary = "📝 *Meeting Summary*\n";
+	summary = summary + "• Key decisions captured\n";
+	summary = summary + "• Action items created\n";
+	summary = summary + "• Follow-up tasks scheduled\n";
+	response.put("text",summary);
+}
+return response;

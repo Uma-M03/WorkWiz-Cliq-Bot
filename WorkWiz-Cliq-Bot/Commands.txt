@@ -1,0 +1,35 @@
+Applyleave
+
+ text = "📝 Leave Applied\nType: Sick Leave\nStatus: Pending Approval";
+return {"text":text};
+
+Attendance 
+  response = Map();
+response.put("text","📊 Your Attendance Today\n\n✓ Present\n✓ Check-in: 9:15 AM\n✓ Working Hours: 7 hr 20 min");
+return response;
+
+ Empinfo
+      text = "👤 Employee Info: Uma Maheswari\n• Department: Fullstack\n• Role: Fullstack Developer\n• Email: uma@example.com\n\n" + "👤 Employee Info: Narmatha\n• Department: Testing\n• Role: Software Developer\n• Email: narmatha@example.com\n\n" + "👤 Employee Info: Kaviya\n• Department: Designing\n• Role: Frontend Developer\n• Email: kaviya@example.com";
+return {"text":text};
+
+ Helpwiz  
+      response = Map();
+response.put("text","🤖 WorkWiz – Slash Commands \n\n" + "• /attendance  — Today attendance\n" + "• /summary <month>  — Monthly attendance\n" + "• /applyleave date=... reason=...  — Apply leave\n" + "• /salaryslip month=... year=... — Salary slip\n" + "• /meeting — Start meeting planner\n" + "• /tasks — Today tasks\n" + "• /employeeinfo <name> — Lookup employee\n");
+return response;
+
+ Meeting  
+ 
+         text = "📝 Meeting Request Received\nTime: 2025-12-01 15:00\nAttendees: Ravi, Arjun\nReminder: Yes\n\n✅ Your meeting has been scheduled.";
+return {"text":text};
+ 
+Salaryslip 
+   text = "📄 Salary Slip Request Received\nMonth: Oct\nYear: 2025\n\n✉ Your salary slip will be sent to your registered email shortly.";
+return {"text":text};
+
+ Summary                                                                                                                       text = "📊 Daily Summary\nPresent: Yes\nTasks Completed: 4\nPending: 2";
+return {"text":text};
+
+ Tasks                                                                                                                                                                                             
+response = Map();
+response.put("text","📌 Your Tasks Today\n\n1. Submit project report\n2. Attend standup meeting at 11 AM\n3. Review feedback");
+return response;

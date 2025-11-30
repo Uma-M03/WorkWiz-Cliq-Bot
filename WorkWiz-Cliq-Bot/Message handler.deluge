@@ -1,0 +1,90 @@
+
+response = Map();
+message = message.toLowerCase();
+text = "";
+// ---------------------------------------
+// 1️⃣ Greetings 
+// ---------------------------------------
+if(message.contains("hi") || message.contains("hello") || message.contains("hey"))
+{
+	text = "👋 Hi " + user.get("first_name") + "! How can *WorkWiz* assist you today?\n\nTry:\n• attendance\n• leave\n• apply leave\n• salary slip\n• meeting\n• help";
+}
+// ---------------------------------------
+// 2️⃣ Help Command
+// ---------------------------------------
+else if(message.contains("help"))
+{
+	text = "🤖 *WorkWiz – Your Smart HR Assistant*\n\nI can help you with:\n";
+	text = text + "• 📊 Attendance Summary\n";
+	text = text + "• 📝 Apply Leave\n";
+	text = text + "• 📄 Salary Slip / HR Docs\n";
+	text = text + "• 📅 Meeting Planner\n";
+	text = text + "• 👥 Employee Lookup\n";
+	text = text + "• 🔔 Reminders & Tasks\n";
+}
+// ---------------------------------------
+// 3️⃣ Attendance Checker
+// ---------------------------------------
+else if(message.contains("attendance"))
+{
+	text = "📊 *Your Attendance Today*\n\n✓ Present\n✓ Check-in: 9:15 AM\n✓ Working Hours: 7 hr 20 min\n\nWant *monthly summary*? Type: attendance summary";
+}
+// ---------------------------------------
+// 4️⃣ Attendance Summary Context
+// ---------------------------------------
+else if(message.contains("attendance summary"))
+{
+	text = "Sure! I need one detail 🙂";
+	context = {"id":"attendance_summary","timeout":"300","params":{{"name":"month","question":"Which month do you want summary for?"}}};
+	response.put("context",context);
+}
+// ---------------------------------------
+// 5️⃣ Leave Balance
+// ---------------------------------------
+else if(message.contains("leave balance"))
+{
+	text = "📝 *Your Leave Balance*\n\n• Casual Leave: 6 days\n• Sick Leave: 4 days\n• Earned Leave: 12 days\n\nTo apply leave, type: apply leave";
+}
+// ---------------------------------------
+// 6️⃣ Apply Leave Context
+// ---------------------------------------
+else if(message.contains("apply leave"))
+{
+	text = "Great! Let's apply for your leave 😊";
+	context = {"id":"leave_apply","timeout":"300","params":{{"name":"leave_date","question":"Which date do you want leave?"},{"name":"reason","question":"Reason for leave?"},{"name":"sex","question":"Leave Type","suggestions":{"list":{{"text":"Sick Leave"},{"text":"Casual Leave"},{"text":"Earned Leave"}}}}}};
+	response.put("context",context);
+}
+// ---------------------------------------
+// 7️⃣ HR Document Generate (Salary Slip)
+// ---------------------------------------
+else if(message.contains("salary slip") || message.contains("document"))
+{
+	text = "Please provide the month & year 🙂";
+	context = {"id":"document_generate","timeout":"300","params":{{"name":"month","question":"Enter month:"},{"name":"year","question":"Enter year:"}}};
+	response.put("context",context);
+}
+// ---------------------------------------
+// 8️⃣ 💡 NEW FEATURE — MEETING SETUP + EMPLOYEE LOOKUP
+// ---------------------------------------
+else if(message.contains("meeting") || message.contains("i have a meeting"))
+{
+	text = "📅 Great! Let's plan your meeting.\n\nFirst, tell me the *meeting date & time* (Ex: 2025-12-01 03:00 PM)";
+	context = {"id":"meeting_setup","timeout":"600","params":{{"name":"meeting_time","question":"Enter meeting time:"},{"name":"attendees","question":"Who will attend? (Names separated by comma)"},{"name":"confirm","question":"Shall I set a reminder?","suggestions":{"list":{{"text":"Yes"},{"text":"No"}}}}}};
+	response.put("context",context);
+}
+// ---------------------------------------
+// 9️⃣ Tasks
+// ---------------------------------------
+else if(message.contains("task") || message.contains("tasks"))
+{
+	text = "📌 *Your Tasks for Today*\n\n1. Submit project report\n2. Attend standup at 11 AM\n3. Review feedback\n\nType: done task 1";
+}
+// ---------------------------------------
+// 🔟 Default Reply
+// ---------------------------------------
+else
+{
+	text = "I'm here to help! 😊\nType *help* to see what I can do.";
+}
+response.put("text",text);
+return response;

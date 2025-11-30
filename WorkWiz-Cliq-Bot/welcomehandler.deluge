@@ -1,0 +1,20 @@
+
+response = Map();
+if(newuser)
+{
+	msg = "?? Hello *" + user.get("first_name") + "*!\n\n";
+	msg = msg + "I'm *Workwiz*, your smart office assistant ???.\n";
+	msg = msg + "I can help you with:\n";
+	msg = msg + "• Attendance info\n";
+	msg = msg + "• Leave status\n";
+	msg = msg + "• Daily tasks\n";
+	msg = msg + "• HR reminders\n";
+	msg = msg + "• Quick office updates\n\n";
+	msg = msg + "Just type *help* to get started! ??";
+	response.put("text",msg);
+}
+else
+{
+	response.put("text","Welcome back *" + user.get("first_name") + "*! ?? How can I assist you today?");
+}
+return response;

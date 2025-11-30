@@ -1,0 +1,85 @@
+
+// 1️⃣ Keep existing webhook info for debugging (optional)
+response = Map();
+info "Received HTTP " + http_method + " call with " + params.size() + " param(s), " + headers.size() + " header(s) and JSON body length: " + body.length();
+// 2️⃣ Parse JSON body safely
+command = "";
+userInput = "";
+// body is a string, try to convert to map
+try 
+{
+	bodyMap = Map();
+	if(body != null && body.trim() != "")
+	{
+		// Convert JSON string to map
+		bodyMap = body.toMap();
+	}
+	if(bodyMap.containsKey("command"))
+	{
+		command = bodyMap.get("command");
+		// ✅ only one argument
+	}
+	if(bodyMap.containsKey("text"))
+	{
+		userInput = bodyMap.get("text");
+	}
+}
+catch (e)
+{
+	response.put("text","⚠️ Could not read JSON body. Please check input format.");
+	info response;
+	return response;
+}
+// 3️⃣ Handle different commands
+if(command == "attendance")
+{
+	if(userInput == null || userInput.trim() == "")
+	{
+		response.put("text","📅 Please enter a month. Example: /attendance November");
+	}
+	else
+	{
+		response.put("text","📊 Attendance for " + userInput + ": 20/22 days");
+	}
+}
+else if(command == "applyleave")
+{
+	if(userInput == null || userInput.trim() == "")
+	{
+		response.put("text","📌 Please enter leave date. Example: /applyleave 30-November");
+	}
+	else
+	{
+		response.put("text","✅ Leave applied for " + userInput);
+	}
+}
+else if(command == "summary")
+{
+	if(userInput == null || userInput.trim() == "")
+	{
+		response.put("text","📊 Please enter month. Example: /summary October");
+	}
+	else
+	{
+		response.put("text","📊 Attendance summary for " + userInput + ": 20/22 days, 2 leaves");
+	}
+}
+else if(command == "empinfo")
+{
+	response.put("text","👤 Employee Info:\nName: Uma Maheswari\nDepartment: Fullstack\nRole: Fullstack Developer\nEmail: uma@example.com");
+}
+else if(command == "tasks")
+{
+	response.put("text","📝 Pending tasks:\n1. Complete project report\n2. Review code\n3. Team meeting at 4 PM");
+}
+else if(command == "salaryslip")
+{
+	response.put("text","💰 Salary Slip for November:\nBasic: 30,000\nHRA: 10,000\nDeductions: 5,000\nNet Pay: 35,000");
+}
+else
+{
+	response.put("text","❌ Unknown command. Try /attendance, /applyleave, /summary, /empinfo, /tasks, or /salaryslip.");
+}
+// 4️⃣ Return response
+info response;
+return response;
